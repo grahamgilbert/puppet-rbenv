@@ -127,7 +127,7 @@ class rbenv (
       cwd         => $install_dir,
       user        => $owner,
       environment => $env,
-      onlyif      => '/usr/bin/test $(git rev-parse --abbrev-ref HEAD) != "master"',
+      onlyif      => "${test_path} $(git rev-parse --abbrev-ref HEAD) != \"master\"",
       require     => File[$install_dir],
     } ->
     exec { 'update-rbenv':

@@ -14,15 +14,19 @@ class rbenv::params {
   case $::osfamily {
     'Debian': {
       $group = 'adm'
+      $test_path = '/usr/bin/test'
     }
     'RedHat': {
       $group = 'wheel'
+      $test_path = '/usr/bin/test'
     }
     'Suse': {
       $group = 'users'
+      $test_path = '/usr/bin/test'
     }
     'Darwin': {
       $group = 'wheel'
+      $test_path = '/bin/test'
     }
     default: {
       fail('The rbenv module currently only suports Debian, RedHat, and Suse.')
