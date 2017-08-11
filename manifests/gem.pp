@@ -61,7 +61,8 @@ define rbenv::gem(
   $skip_docs    = false,
   $timeout      = 300,
   $env          = $rbenv::env,
-  $source       = "https://rubygems.org/"
+  $source       = "https://rubygems.org/",
+  $chown_path   = $rbenv::chown_path,
 ) {
   include rbenv
 

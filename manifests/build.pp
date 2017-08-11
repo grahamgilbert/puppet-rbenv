@@ -67,6 +67,7 @@ define rbenv::build (
   $env              = $rbenv::env,
   $patch            = undef,
   $bundler_version  = '>=0',
+  $chown_path       = $rbenv::chown_path,
 ) {
   include rbenv
 
@@ -123,7 +124,7 @@ define rbenv::build (
                             $patch ? { undef => '', false => '', default => ' --patch' } ], '')
 
   exec { "own-plugins-${title}":
-    command => "chown -R ${owner}:${group} ${install_dir}/plugins",
+    command => "${chown_path} -R ${owner}:${group} ${install_dir}/plugins",
     user    => 'root',
     unless  => "test -d ${install_dir}/versions/${title}",
     require => Class['rbenv'],
@@ -141,7 +142,7 @@ define rbenv::build (
     creates => "${install_dir}/versions/${title}",
   }~>
   exec { "rbenv-ownit-${title}":
-    command     => "chown -R ${owner}:${group} \
+    command     => "${chown_path} -R ${owner}:${group} \
                     ${install_dir}/versions/${title} && \
                     chmod -R g+w ${install_dir}/versions/${title}",
     user        => 'root',

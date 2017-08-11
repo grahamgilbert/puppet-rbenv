@@ -34,7 +34,8 @@ define rbenv::plugin(
   $install_dir = $rbenv::install_dir,
   $latest      = false,
   $env         = $rbenv::env,
-  $test_path   = $rbenv::test_path
+  $test_path   = $rbenv::test_path,
+  $chown_path  = $rbenv::chown_path
 ) {
   include rbenv
 
@@ -49,7 +50,7 @@ define rbenv::plugin(
     unless  => "${test_path} -d ${install_dir}/plugins/${plugin[1]}",
   }~>
   exec { "rbenv-permissions-${name}":
-    command     => "/bin/chown -R ${rbenv::owner}:${rbenv::group} \
+    command     => "${chown_path} -R ${rbenv::owner}:${rbenv::group} \
                     ${install_dir} && \
                     /bin/chmod -R g+w ${install_dir}",
     refreshonly => true,

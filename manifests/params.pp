@@ -15,18 +15,22 @@ class rbenv::params {
     'Debian': {
       $group = 'adm'
       $test_path = '/usr/bin/test'
+      $chown_path = '/bin/chown'
     }
     'RedHat': {
       $group = 'wheel'
       $test_path = '/usr/bin/test'
+      $chown_path = '/bin/chown'
     }
     'Suse': {
       $group = 'users'
       $test_path = '/usr/bin/test'
+      $chown_path = '/bin/chown'
     }
     'Darwin': {
       $group = 'wheel'
       $test_path = '/bin/test'
+      $chown_path = '/usr/sbin/chown'
     }
     default: {
       fail('The rbenv module currently only suports Debian, RedHat, and Suse.')
