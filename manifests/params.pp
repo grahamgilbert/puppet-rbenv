@@ -22,7 +22,7 @@ class rbenv::params {
       $group = 'users'
     }
     'Darwin': {
-      $group = 'whell'
+      $group = 'wheel'
     }
     default: {
       fail('The rbenv module currently only suports Debian, RedHat, and Suse.')
