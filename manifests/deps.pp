@@ -22,7 +22,7 @@ class rbenv::deps {
       include rbenv::deps::suse
     }
     'Darwin': {
-      # include rbenv::deps::darwin
+      include rbenv::deps::darwin
     }
     default: {
       fail('The rbenv module currently only suports Debian, RedHat, and Suse.')

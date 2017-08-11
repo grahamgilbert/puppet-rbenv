@@ -96,7 +96,7 @@ define rbenv::gem(
     refreshonly => true,
   }~>
   exec { "ruby-${ruby_version}-rbenv-permissions-${gem}-${version_for_exec_name}":
-    command     => "/bin/chown -R ${rbenv::owner}:${rbenv::group} \
+    command     => "${chown_path} -R ${rbenv::owner}:${rbenv::group} \
                   ${install_dir}/versions/${ruby_version}/lib/ruby/gems && \
                   /bin/chmod -R g+w \
                   ${install_dir}/versions/${ruby_version}/lib/ruby/gems",
