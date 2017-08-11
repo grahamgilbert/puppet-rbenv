@@ -21,6 +21,9 @@ class rbenv::params {
     'Suse': {
       $group = 'users'
     }
+    'Darwin': {
+      $group = 'whell'
+    }
     default: {
       fail('The rbenv module currently only suports Debian, RedHat, and Suse.')
     }
