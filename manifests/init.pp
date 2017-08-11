@@ -135,7 +135,7 @@ class rbenv (
       cwd         => $install_dir,
       user        => $owner,
       environment => $env,
-      unless      => '/usr/bin/git fetch --quiet; /usr/bin/test $(git rev-parse HEAD) == $(git rev-parse @{u})',
+      unless      => "/usr/bin/git fetch --quiet; ${test_path} $(git rev-parse HEAD) == $(git rev-parse @{u})",
       require     => File[$install_dir],
     }
   } elsif $version {

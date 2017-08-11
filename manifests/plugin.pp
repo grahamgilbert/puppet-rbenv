@@ -34,6 +34,7 @@ define rbenv::plugin(
   $install_dir = $rbenv::install_dir,
   $latest      = false,
   $env         = $rbenv::env,
+  $test_path   = $rbenv::test_path
 ) {
   include rbenv
 
@@ -44,8 +45,8 @@ define rbenv::plugin(
   exec { "install-${name}":
     command => "/usr/bin/git clone https://github.com/${name}.git",
     cwd     => "${install_dir}/plugins",
-    onlyif  => "/usr/bin/test -d ${install_dir}/plugins",
-    unless  => "/usr/bin/test -d ${install_dir}/plugins/${plugin[1]}",
+    onlyif  => "${test_path} -d ${install_dir}/plugins",
+    unless  => "${test_path} -d ${install_dir}/plugins/${plugin[1]}",
   }~>
   exec { "rbenv-permissions-${name}":
     command     => "/bin/chown -R ${rbenv::owner}:${rbenv::group} \
@@ -60,7 +61,7 @@ define rbenv::plugin(
       command => '/usr/bin/git pull',
       cwd     => "${install_dir}/plugins/${plugin[1]}",
       user    => $rbenv::owner,
-      onlyif  => "/usr/bin/test -d ${install_dir}/plugins/${plugin[1]}",
+      onlyif  => "${test_path} -d ${install_dir}/plugins/${plugin[1]}",
     }
   }
 }
